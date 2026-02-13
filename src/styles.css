@@ -1295,4 +1295,226 @@ body {
   .message-row {
     gap: 4px;
   }
+
+  .discovery-card {
+    width: 100% !important;
+    min-width: 0 !important;
+  }
+}
+
+/* ── Discovery Card ───────────────────────────────────────── */
+
+.discovery-card-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 0 16px;
+  width: 100%;
+}
+
+.discovery-card-wrapper .bubble {
+  align-self: flex-start;
+}
+
+.discovery-card {
+  width: 380px;
+  background: linear-gradient(145deg, #0A1F3F 0%, #0D2847 40%, #112E52 100%);
+  border-radius: 16px;
+  padding: 28px 24px;
+  color: #E9EDEF;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.discovery-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(0, 168, 132, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.discovery-card::after {
+  content: '';
+  position: absolute;
+  bottom: -40px;
+  left: -40px;
+  width: 140px;
+  height: 140px;
+  background: radial-gradient(circle, rgba(0, 111, 186, 0.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.dc-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 4px;
+}
+
+.dc-header-icon {
+  font-size: 28px;
+  line-height: 1;
+}
+
+.dc-header-text {
+  display: flex;
+  flex-direction: column;
+}
+
+.dc-title {
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: #00A884;
+}
+
+.dc-date {
+  font-size: 11px;
+  color: #8696A0;
+  margin-top: 2px;
+}
+
+.dc-divider {
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin: 14px 0;
+}
+
+.dc-section {
+  position: relative;
+  z-index: 1;
+}
+
+.dc-section-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: #8696A0;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+}
+
+.dc-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dc-timeline-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.dc-timeline-emoji {
+  flex-shrink: 0;
+  width: 18px;
+  text-align: center;
+}
+
+.dc-timeline-year {
+  font-weight: 700;
+  color: #E9EDEF;
+  flex-shrink: 0;
+}
+
+.dc-timeline-arrow {
+  color: #00A884;
+  flex-shrink: 0;
+}
+
+.dc-timeline-event {
+  color: #8696A0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.dc-value-badge {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.dc-value-emoji {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.dc-value-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #E9EDEF;
+}
+
+.dc-footer {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+}
+
+.dc-quote {
+  font-size: 12px;
+  font-style: italic;
+  color: #8696A0;
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+
+.dc-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.dc-brand-icon {
+  font-size: 14px;
+}
+
+.dc-brand-text {
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: #667781;
+}
+
+.discovery-card-download-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 24px;
+  background: #00A884;
+  color: #fff;
+  border: none;
+  border-radius: 24px;
+  font-family: var(--font);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  box-shadow: 0 4px 12px rgba(0, 168, 132, 0.3);
+}
+
+.discovery-card-download-btn:hover {
+  background: #00C49A;
+  transform: translateY(-1px);
+}
+
+.discovery-card-download-btn:active {
+  transform: translateY(0);
+  background: #009B7A;
 }

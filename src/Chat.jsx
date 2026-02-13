@@ -1,8 +1,10 @@
 import { useState, useEffect, useRef, useCallback } from 'react'
+import { toPng } from 'html-to-image'
 import ChatHeader from './components/ChatHeader'
 import MessageBubble from './components/MessageBubble'
 import TypingIndicator from './components/TypingIndicator'
 import QuickReplies from './components/QuickReplies'
+import DiscoveryCard from './components/DiscoveryCard'
 
 export default function Chat({
   section,
@@ -24,6 +26,7 @@ export default function Chat({
   const [inputError, setInputError] = useState(null)
   const messagesEndRef = useRef(null)
   const inputRef = useRef(null)
+  const cardRef = useRef(null)
   const flowRef = useRef(section.flow)
   const processingRef = useRef(false)
   const timeoutRef = useRef(null)
@@ -293,6 +296,32 @@ export default function Chat({
     return replies[0]
   }
 
+  const handleDownloadCard = useCallback(async () => {
+    if (!cardRef.current) return
+    try {
+      const dataUrl = await toPng(cardRef.current, { pixelRatio: 2 })
+      // Try Web Share API on mobile first
+      if (navigator.share && navigator.canShare) {
+        try {
+          const blob = await (await fetch(dataUrl)).blob()
+          const file = new File([blob], 'my-discovery-card.png', { type: 'image/png' })
+          if (navigator.canShare({ files: [file] })) {
+            await navigator.share({ files: [file], title: 'My Discovery Card' })
+            return
+          }
+        } catch {
+          // Fall through to download
+        }
+      }
+      const link = document.createElement('a')
+      link.download = 'my-discovery-card.png'
+      link.href = dataUrl
+      link.click()
+    } catch (err) {
+      console.error('Failed to generate card image:', err)
+    }
+  }, [])
+
   const handleKeyDown = useCallback((e) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault()
@@ -323,6 +352,22 @@ export default function Chat({
               return (
                 <div key={msg.key} className="chapter-divider">
                   <span>{msg.text}</span>
+                </div>
+              )
+            }
+            if (msg.type === 'discovery-card') {
+              return (
+                <div key={msg.key} className="discovery-card-wrapper">
+                  <div className="bubble bubble-bot">
+                    <div className="bubble-text">{msg.text}</div>
+                  </div>
+                  <DiscoveryCard ref={cardRef} userData={userData} />
+                  <button className="discovery-card-download-btn" onClick={handleDownloadCard}>
+                    <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor">
+                      <path d="M19 9h-4V3H9v6H5l7 7 7-7zM5 18v2h14v-2H5z"/>
+                    </svg>
+                    Save my card
+                  </button>
                 </div>
               )
             }
