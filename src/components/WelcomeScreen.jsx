@@ -13,7 +13,7 @@ export default function WelcomeScreen({ onStart }) {
         <div className="welcome-info">
           <div className="welcome-info-item">
             <span className="welcome-info-icon">⏱</span>
-            <span>~25 minutes</span>
+            <span>~25-30 minutes</span>
           </div>
           <div className="welcome-info-item">
             <span className="welcome-info-icon">💬</span>
@@ -21,23 +21,23 @@ export default function WelcomeScreen({ onStart }) {
           </div>
           <div className="welcome-info-item">
             <span className="welcome-info-icon">🎯</span>
-            <span>5 chapters to explore</span>
+            <span>3 phases + 1 exploration branch</span>
           </div>
         </div>
 
         <div className="welcome-chapters">
-          <div className="welcome-chapter">👋 Welcome</div>
-          <div className="welcome-chapter">📅 History</div>
-          <div className="welcome-chapter">🧭 Purpose & Values</div>
-          <div className="welcome-chapter">🚢 Activities</div>
-          <div className="welcome-chapter">🤝 Foundation</div>
+          <div className="welcome-chapter">📅 My Story × Our Story</div>
+          <div className="welcome-chapter">🧭 My Values in Action</div>
+          <div className="welcome-chapter">🚢 The Group in Action</div>
+          <div className="welcome-chapter">🔀 Explorer Branch</div>
+          <div className="welcome-chapter">🎓 Your Discovery Capsule</div>
         </div>
 
         <button className="welcome-cta" onClick={onStart}>
           Start your journey
         </button>
 
-        <p className="welcome-demo-badge">Interactive Demonstrator</p>
+        <p className="welcome-demo-badge">Interactive Demonstrator — v2.1</p>
       </div>
     </div>
   )

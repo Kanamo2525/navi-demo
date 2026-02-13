@@ -1,7 +1,9 @@
-import chapter1 from './chapter1'
-import chapter2 from './chapter2'
-import chapter3 from './chapter3'
-import chapter4 from './chapter4'
-import chapter5 from './chapter5'
+import phase1 from './phase1'
+import phase2 from './phase2'
+import phase3 from './phase3'
+import branchGreen from './branchGreen'
+import branchGrowth from './branchGrowth'
+import branchAI from './branchAI'
+import epilogue from './epilogue'
 
-export const chapters = [chapter1, chapter2, chapter3, chapter4, chapter5]
+export { phase1, phase2, phase3, branchGreen, branchGrowth, branchAI, epilogue }

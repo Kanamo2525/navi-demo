@@ -37,6 +37,9 @@ export default function MessageBubble({ message }) {
   const isMedia = message.type === 'media'
   const isCard = message.type === 'card'
   const isQuiz = message.type === 'quiz-result'
+  const isHighlight = message.type === 'highlight'
+  const isBadge = message.type === 'badge'
+  const isInfoCard = message.type === 'info-card'
 
   if (isSystem) {
     return (
@@ -48,10 +51,23 @@ export default function MessageBubble({ message }) {
     )
   }
 
+  // Badge unlock visual
+  if (isBadge) {
+    return (
+      <div className="message-row system">
+        <div className="badge-unlock">
+          <div className="badge-icon">{message.badge?.emoji || '🏆'}</div>
+          <div className="badge-title">{message.badge?.title || 'Badge Unlocked!'}</div>
+          {message.text && <div className="badge-desc">{formatText(message.text)}</div>}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className={`message-row ${isUser ? 'user' : 'bot'}`}>
       {!isUser && <div className="message-avatar">🧭</div>}
-      <div className={`message-bubble ${isUser ? 'user' : 'bot'} ${isMedia ? 'media' : ''} ${isCard ? 'card' : ''} ${isQuiz ? 'quiz-result' : ''}`}>
+      <div className={`message-bubble ${isUser ? 'user' : 'bot'} ${isMedia ? 'media' : ''} ${isCard ? 'card' : ''} ${isQuiz ? 'quiz-result' : ''} ${isHighlight ? 'highlight' : ''} ${isInfoCard ? 'info-card' : ''}`}>
         {isMedia && message.media && (
           <div className="media-placeholder">
             <span className="media-emoji">{message.media.emoji || '📷'}</span>
@@ -66,6 +82,19 @@ export default function MessageBubble({ message }) {
               <div className="card-items">
                 {message.card.items.map((item, i) => (
                   <div key={i} className="card-item">{item}</div>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+        {isInfoCard && message.infoCard && (
+          <div className="info-card-content">
+            {message.infoCard.emoji && <div className="info-card-emoji">{message.infoCard.emoji}</div>}
+            {message.infoCard.title && <div className="info-card-title">{formatText(message.infoCard.title)}</div>}
+            {message.infoCard.items && (
+              <div className="info-card-items">
+                {message.infoCard.items.map((item, i) => (
+                  <div key={i} className="info-card-item">{formatText(item)}</div>
                 ))}
               </div>
             )}

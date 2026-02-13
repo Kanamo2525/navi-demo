@@ -1,14 +1,4 @@
-import { chapters } from '../data'
-
-const CHAPTER_META = [
-  { emoji: '👋', title: 'Welcome', preview: 'Your journey starts here' },
-  { emoji: '📅', title: 'History', preview: 'One ship. One dream.' },
-  { emoji: '🧭', title: 'Purpose & Values', preview: 'What drives us' },
-  { emoji: '🚢', title: 'Activities', preview: 'What we do' },
-  { emoji: '🤝', title: 'Foundation', preview: 'How we give back' },
-]
-
-export default function Sidebar({ currentChapter, completedChapters, onSelect }) {
+export default function Sidebar({ sections, currentSection, completedSections, chosenBranch }) {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -17,7 +7,7 @@ export default function Sidebar({ currentChapter, completedChapters, onSelect })
           <span className="sidebar-brand">Navi</span>
         </div>
         <div className="sidebar-header-right">
-          <span className="sidebar-badge">Discovery</span>
+          <span className="sidebar-badge">Discovery v2.1</span>
         </div>
       </div>
 
@@ -27,38 +17,36 @@ export default function Sidebar({ currentChapter, completedChapters, onSelect })
             <circle cx="11" cy="11" r="8" />
             <line x1="21" y1="21" x2="16.65" y2="16.65" />
           </svg>
-          <span>Search chapters</span>
+          <span>Your journey</span>
         </div>
       </div>
 
       <div className="sidebar-chapters">
-        {CHAPTER_META.map((ch, i) => {
-          const isActive = i === currentChapter
-          const isDone = completedChapters.includes(i)
-          const isLocked = i > 0 && !completedChapters.includes(i - 1) && i !== currentChapter
+        {sections.map((sec, i) => {
+          const isActive = i === currentSection
+          const isDone = completedSections.includes(i)
+          const isLocked = i > 0 && !completedSections.includes(i - 1) && !isActive
           return (
-            <button
-              key={i}
+            <div
+              key={sec.id}
               className={`sidebar-item ${isActive ? 'active' : ''} ${isDone ? 'done' : ''} ${isLocked ? 'locked' : ''}`}
-              onClick={() => !isLocked && onSelect(i)}
-              disabled={isLocked}
             >
               <div className="sidebar-item-avatar">
-                <span>{ch.emoji}</span>
+                <span>{sec.emoji}</span>
               </div>
               <div className="sidebar-item-content">
                 <div className="sidebar-item-top">
-                  <span className="sidebar-item-name">Ch.{i + 1} — {ch.title}</span>
+                  <span className="sidebar-item-name">{sec.title}</span>
                   <span className="sidebar-item-time">
                     {isDone ? '✓' : isActive ? 'now' : ''}
                   </span>
                 </div>
                 <div className="sidebar-item-preview">
-                  {isDone ? 'Completed' : ch.preview}
+                  {isDone ? 'Completed' : sec.subtitle || ''}
                 </div>
               </div>
               {isActive && <div className="sidebar-item-unread">●</div>}
-            </button>
+            </div>
           )
         })}
       </div>
@@ -67,11 +55,11 @@ export default function Sidebar({ currentChapter, completedChapters, onSelect })
         <div className="sidebar-footer-progress">
           <div
             className="sidebar-footer-bar"
-            style={{ width: `${(completedChapters.length / chapters.length) * 100}%` }}
+            style={{ width: `${(completedSections.length / sections.length) * 100}%` }}
           />
         </div>
         <span className="sidebar-footer-text">
-          {completedChapters.length}/{chapters.length} chapters completed
+          {completedSections.length}/{sections.length} sections completed
         </span>
       </div>
     </div>
