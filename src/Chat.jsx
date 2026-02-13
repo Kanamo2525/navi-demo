@@ -28,6 +28,7 @@ export default function Chat({
   const processingRef = useRef(false)
   const timeoutRef = useRef(null)
   const userDataRef = useRef(userData)
+  const lastProcessedRef = useRef(-1)
 
   // Keep userData ref in sync
   useEffect(() => {
@@ -46,6 +47,7 @@ export default function Chat({
     setFlowIndex(0)
     setInputText('')
     setInputError(null)
+    lastProcessedRef.current = -1
   }, [section.id])
 
   // Auto-scroll
@@ -150,7 +152,8 @@ export default function Chat({
 
   // Trigger message processing when flowIndex changes
   useEffect(() => {
-    if (flowIndex >= 0 && !currentReplies && !waitingForInput) {
+    if (flowIndex >= 0 && !currentReplies && !waitingForInput && flowIndex !== lastProcessedRef.current) {
+      lastProcessedRef.current = flowIndex
       processMessage(flowIndex)
     }
   }, [flowIndex, processMessage, currentReplies, waitingForInput])
@@ -180,15 +183,14 @@ export default function Chat({
     if (reply.goto) {
       const targetIndex = flow.findIndex(m => m.id === reply.goto)
       if (targetIndex !== -1) {
-        setTimeout(() => setFlowIndex(targetIndex), 400)
+        setFlowIndex(targetIndex)
       } else {
-        // goto not found in current section — advance
         const nextIndex = (currentReplies?.messageIndex ?? flowIndex) + 1
-        setTimeout(() => setFlowIndex(nextIndex), 400)
+        setFlowIndex(nextIndex)
       }
     } else {
       const nextIndex = (currentReplies?.messageIndex ?? flowIndex) + 1
-      setTimeout(() => setFlowIndex(nextIndex), 400)
+      setFlowIndex(nextIndex)
     }
   }, [flowIndex, currentReplies, onScore, onBranchSelect])
 
@@ -225,9 +227,7 @@ export default function Chat({
       setWaitingForInput(null)
       setInputText('')
       setInputError(null)
-
-      // Continue to next message
-      setTimeout(() => setFlowIndex(flowIndex + 1), 400)
+      setFlowIndex(flowIndex + 1)
       return
     }
 
@@ -255,14 +255,14 @@ export default function Chat({
       if (bestReply.goto) {
         const targetIndex = flow.findIndex(m => m.id === bestReply.goto)
         if (targetIndex !== -1) {
-          setTimeout(() => setFlowIndex(targetIndex), 400)
+          setFlowIndex(targetIndex)
         } else {
           const nextIndex = (currentReplies?.messageIndex ?? flowIndex) + 1
-          setTimeout(() => setFlowIndex(nextIndex), 400)
+          setFlowIndex(nextIndex)
         }
       } else {
         const nextIndex = (currentReplies?.messageIndex ?? flowIndex) + 1
-        setTimeout(() => setFlowIndex(nextIndex), 400)
+        setFlowIndex(nextIndex)
       }
     }
   }, [inputText, currentReplies, waitingForInput, flowIndex, onScore, onInput, onBranchSelect])
