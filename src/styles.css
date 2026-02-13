@@ -6,43 +6,51 @@
 }
 
 :root {
-  /* WhatsApp Dark palette */
-  --wa-bg: #111B21;
-  --wa-bg-deeper: #0B141A;
-  --wa-sidebar-bg: #111B21;
-  --wa-sidebar-header: #202C33;
-  --wa-chat-header: #202C33;
-  --wa-chat-bg: #0B141A;
-  --wa-input-bg: #202C33;
-  --wa-border: #2A3942;
-  --wa-search-bg: #202C33;
-  --wa-search-input: #2A3942;
-  --wa-hover: #202C33;
-  --wa-active: #2A3942;
-  --wa-green: #00A884;
-  --wa-green-light: #25D366;
-  --wa-blue-check: #53BDEB;
-  --wa-bubble-out: #005C4B;
-  --wa-bubble-in: #202C33;
-  --wa-bubble-system: rgba(255,255,255,0.05);
-  --wa-text-primary: #E9EDEF;
-  --wa-text-secondary: #8696A0;
-  --wa-text-muted: #667781;
-  --wa-text-bubble: #E9EDEF;
-  --wa-unread: #00A884;
-  --wa-icon: #AEBAC1;
+  /* CMA CGM Brand palette */
+  --cma-red: #E20101;
+  --cma-red-light: #FF3333;
+  --cma-red-dark: #B80000;
+  --cma-navy: #0A2071;
+  --cma-navy-light: #1A3494;
+  --cma-navy-dark: #060F3A;
 
-  /* CMA CGM accent */
-  --cma-navy: #0A1F3F;
-  --cma-blue: #006FBA;
-  --cma-blue-light: #4A90D9;
-  --cma-orange: #E86C00;
+  /* UI surfaces — dark navy theme */
+  --wa-bg: #0C1229;
+  --wa-bg-deeper: #080E1F;
+  --wa-sidebar-bg: #0C1229;
+  --wa-sidebar-header: #111937;
+  --wa-chat-header: #111937;
+  --wa-chat-bg: #080E1F;
+  --wa-input-bg: #111937;
+  --wa-border: #1A2750;
+  --wa-search-bg: #111937;
+  --wa-search-input: #1A2750;
+  --wa-hover: #131D40;
+  --wa-active: #1A2750;
+
+  /* Accent */
+  --wa-green: #E20101;
+  --wa-green-light: #FF3333;
+  --wa-blue-check: #53BDEB;
+
+  /* Bubbles */
+  --wa-bubble-out: #0A2071;
+  --wa-bubble-in: #151E3E;
+  --wa-bubble-system: rgba(255,255,255,0.05);
+
+  /* Text */
+  --wa-text-primary: #ECEEF4;
+  --wa-text-secondary: #8A93B0;
+  --wa-text-muted: #5E6888;
+  --wa-text-bubble: #ECEEF4;
+  --wa-unread: #E20101;
+  --wa-icon: #8A93B0;
 
   --radius-sm: 6px;
   --radius-md: 8px;
   --radius-lg: 12px;
-  --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
-  --shadow-md: 0 2px 8px rgba(0,0,0,0.4);
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.4);
+  --shadow-md: 0 2px 8px rgba(0,0,0,0.5);
   --font: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 
@@ -65,7 +73,7 @@ body {
 .welcome-screen {
   width: 100%;
   height: 100dvh;
-  background: linear-gradient(165deg, var(--cma-navy) 0%, #002B5C 50%, #003D7A 100%);
+  background: linear-gradient(165deg, #060F3A 0%, #0A2071 50%, #122B8A 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -82,7 +90,7 @@ body {
   right: -50%;
   width: 100%;
   height: 100%;
-  background: radial-gradient(circle, rgba(0,111,186,0.15) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(226,1,1,0.1) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -180,7 +188,7 @@ body {
 .welcome-cta:hover {
   background: var(--wa-green-light);
   transform: translateY(-1px);
-  box-shadow: 0 4px 16px rgba(0,168,132,0.4);
+  box-shadow: 0 4px 16px rgba(226,1,1,0.4);
 }
 
 .welcome-cta:active {
@@ -199,7 +207,7 @@ body {
    WHATSAPP WEB DESKTOP LAYOUT
    ══════════════════════════════════════════════════════════════ */
 
-/* Top green bar like WhatsApp Web */
+/* Top brand bar */
 .whatsapp-layout::before {
   content: '';
   position: fixed;
@@ -207,8 +215,8 @@ body {
   left: 0;
   right: 0;
   height: 127px;
-  background: var(--wa-green);
-  background: linear-gradient(180deg, #00A884 0%, #009B7A 100%);
+  background: var(--cma-navy);
+  background: linear-gradient(180deg, #0A2071 0%, #071856 100%);
   z-index: 0;
 }
 
@@ -383,7 +391,7 @@ body {
 }
 
 .sidebar-item.done .sidebar-item-avatar {
-  background: rgba(0,168,132,0.15);
+  background: rgba(226,1,1,0.15);
 }
 
 .sidebar-item-content {
@@ -594,7 +602,7 @@ body {
 
 .progress-dot.active {
   background: var(--wa-green);
-  box-shadow: 0 0 6px rgba(0,168,132,0.5);
+  box-shadow: 0 0 6px rgba(226,1,1,0.5);
 }
 
 .progress-dot.done {
@@ -649,7 +657,7 @@ body {
 
 .chapter-divider span {
   background: var(--wa-bubble-system);
-  background: rgba(17, 27, 33, 0.95);
+  background: rgba(12, 18, 41, 0.95);
   padding: 6px 13px;
   border-radius: var(--radius-md);
   font-size: 0.78rem;
@@ -753,14 +761,14 @@ body {
 }
 
 .message-bubble.quiz-result {
-  background: linear-gradient(135deg, rgba(0,168,132,0.15) 0%, rgba(0,92,75,0.3) 100%);
-  border: 1px solid rgba(0,168,132,0.2);
+  background: linear-gradient(135deg, rgba(226,1,1,0.1) 0%, rgba(10,32,113,0.3) 100%);
+  border: 1px solid rgba(226,1,1,0.2);
 }
 
 /* Highlight bubble — accent border for CMA CGM events & correct answers */
 .message-bubble.highlight {
-  border-left: 3px solid var(--wa-green);
-  background: linear-gradient(135deg, rgba(0,168,132,0.06) 0%, var(--wa-bubble-in) 100%);
+  border-left: 3px solid var(--cma-red);
+  background: linear-gradient(135deg, rgba(226,1,1,0.06) 0%, var(--wa-bubble-in) 100%);
 }
 
 /* Info-card bubble */
@@ -772,7 +780,7 @@ body {
 
 .info-card-content {
   padding: 14px;
-  background: linear-gradient(135deg, rgba(0,111,186,0.08) 0%, rgba(10,31,63,0.15) 100%);
+  background: linear-gradient(135deg, rgba(10,32,113,0.12) 0%, rgba(6,15,58,0.2) 100%);
 }
 
 .info-card-emoji {
@@ -797,7 +805,7 @@ body {
   font-size: 0.84rem;
   color: var(--wa-text-secondary);
   padding-left: 8px;
-  border-left: 2px solid var(--cma-blue);
+  border-left: 2px solid var(--cma-red);
 }
 
 .message-bubble.info-card .message-text {
@@ -808,8 +816,8 @@ body {
 .badge-unlock {
   text-align: center;
   padding: 24px 20px;
-  background: linear-gradient(135deg, rgba(0,168,132,0.12) 0%, rgba(0,92,75,0.2) 100%);
-  border: 1px solid rgba(0,168,132,0.25);
+  background: linear-gradient(135deg, rgba(226,1,1,0.1) 0%, rgba(10,32,113,0.2) 100%);
+  border: 1px solid rgba(226,1,1,0.25);
   border-radius: var(--radius-lg);
   animation: badgePop 0.5s ease-out;
 }
@@ -822,7 +830,7 @@ body {
 .badge-title {
   font-size: 1.1rem;
   font-weight: 700;
-  color: var(--wa-green);
+  color: var(--cma-red);
   margin-bottom: 4px;
 }
 
@@ -867,7 +875,7 @@ body {
 }
 
 .system-message {
-  background: rgba(17, 27, 33, 0.95);
+  background: rgba(12, 18, 41, 0.95);
   padding: 6px 13px;
   border-radius: var(--radius-md);
   font-size: 0.78rem;
@@ -882,7 +890,7 @@ body {
   width: 100%;
   min-height: 180px;
   min-width: 280px;
-  background: linear-gradient(135deg, #1A2E38 0%, #0D2030 100%);
+  background: linear-gradient(135deg, #111937 0%, #0A1229 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -906,7 +914,7 @@ body {
 /* Card Content */
 .card-content {
   padding: 14px;
-  background: linear-gradient(135deg, rgba(0,168,132,0.08) 0%, rgba(0,92,75,0.12) 100%);
+  background: linear-gradient(135deg, rgba(10,32,113,0.12) 0%, rgba(6,15,58,0.2) 100%);
   border-bottom: 1px solid rgba(255,255,255,0.05);
 }
 
@@ -932,7 +940,7 @@ body {
   font-size: 0.84rem;
   color: var(--wa-text-secondary);
   padding-left: 8px;
-  border-left: 2px solid var(--wa-green);
+  border-left: 2px solid var(--cma-red);
 }
 
 .message-bubble.card .message-text {
@@ -1049,10 +1057,10 @@ body {
   transform: scale(0.95);
 }
 
-/* Input active state — green glow when awaiting user input */
+/* Input active state — red glow when awaiting user input */
 .input-area.input-active .input-text-field {
-  border: 1.5px solid rgba(0,168,132,0.5);
-  box-shadow: 0 0 8px rgba(0,168,132,0.15);
+  border: 1.5px solid rgba(226,1,1,0.5);
+  box-shadow: 0 0 8px rgba(226,1,1,0.15);
 }
 
 /* Input error message */
@@ -1104,9 +1112,9 @@ body {
   font-size: 0.88rem;
   font-weight: 500;
   font-family: var(--font);
-  color: var(--wa-green);
+  color: var(--cma-red);
   background: transparent;
-  border: 1.5px solid rgba(0,168,132,0.4);
+  border: 1.5px solid rgba(226,1,1,0.35);
   border-radius: 100px;
   cursor: pointer;
   transition: all 0.2s;
@@ -1114,11 +1122,11 @@ body {
 }
 
 .quick-reply-btn:hover {
-  background: var(--wa-green);
+  background: var(--cma-red);
   color: #FFFFFF;
-  border-color: var(--wa-green);
+  border-color: var(--cma-red);
   transform: translateY(-1px);
-  box-shadow: 0 2px 8px rgba(0,168,132,0.3);
+  box-shadow: 0 2px 8px rgba(226,1,1,0.3);
 }
 
 .quick-reply-btn:active {
@@ -1213,7 +1221,7 @@ body {
 }
 
 .chapter-nav-item.done .chapter-nav-status {
-  color: var(--wa-green);
+  color: var(--cma-red);
 }
 
 .chapter-nav-emoji {
@@ -1319,12 +1327,12 @@ body {
 
 .discovery-card {
   width: 380px;
-  background: linear-gradient(145deg, #0A1F3F 0%, #0D2847 40%, #112E52 100%);
+  background: linear-gradient(145deg, #060F3A 0%, #0A2071 40%, #0E2880 100%);
   border-radius: 16px;
   padding: 28px 24px;
-  color: #E9EDEF;
+  color: #ECEEF4;
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.06);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(255, 255, 255, 0.06);
   position: relative;
   overflow: hidden;
 }
@@ -1336,7 +1344,7 @@ body {
   right: -60px;
   width: 180px;
   height: 180px;
-  background: radial-gradient(circle, rgba(0, 168, 132, 0.12) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(226, 1, 1, 0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -1347,7 +1355,7 @@ body {
   left: -40px;
   width: 140px;
   height: 140px;
-  background: radial-gradient(circle, rgba(0, 111, 186, 0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(10, 32, 113, 0.2) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -1372,12 +1380,12 @@ body {
   font-size: 15px;
   font-weight: 700;
   letter-spacing: 2px;
-  color: #00A884;
+  color: #E20101;
 }
 
 .dc-date {
   font-size: 11px;
-  color: #8696A0;
+  color: #8A93B0;
   margin-top: 2px;
 }
 
@@ -1396,7 +1404,7 @@ body {
   font-size: 9px;
   font-weight: 700;
   letter-spacing: 1.5px;
-  color: #8696A0;
+  color: #8A93B0;
   margin-bottom: 8px;
   text-transform: uppercase;
 }
@@ -1423,17 +1431,17 @@ body {
 
 .dc-timeline-year {
   font-weight: 700;
-  color: #E9EDEF;
+  color: #ECEEF4;
   flex-shrink: 0;
 }
 
 .dc-timeline-arrow {
-  color: #00A884;
+  color: #E20101;
   flex-shrink: 0;
 }
 
 .dc-timeline-event {
-  color: #8696A0;
+  color: #8A93B0;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -1457,7 +1465,7 @@ body {
 .dc-value-title {
   font-size: 15px;
   font-weight: 600;
-  color: #E9EDEF;
+  color: #ECEEF4;
 }
 
 .dc-footer {
@@ -1469,7 +1477,7 @@ body {
 .dc-quote {
   font-size: 12px;
   font-style: italic;
-  color: #8696A0;
+  color: #8A93B0;
   line-height: 1.6;
   margin-bottom: 12px;
 }
@@ -1489,7 +1497,7 @@ body {
   font-size: 10px;
   font-weight: 600;
   letter-spacing: 1px;
-  color: #667781;
+  color: #5E6888;
 }
 
 .discovery-card-download-btn {
@@ -1497,7 +1505,7 @@ body {
   align-items: center;
   gap: 8px;
   padding: 12px 24px;
-  background: #00A884;
+  background: #E20101;
   color: #fff;
   border: none;
   border-radius: 24px;
@@ -1506,15 +1514,15 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, transform 0.1s;
-  box-shadow: 0 4px 12px rgba(0, 168, 132, 0.3);
+  box-shadow: 0 4px 12px rgba(226, 1, 1, 0.3);
 }
 
 .discovery-card-download-btn:hover {
-  background: #00C49A;
+  background: #FF3333;
   transform: translateY(-1px);
 }
 
 .discovery-card-download-btn:active {
   transform: translateY(0);
-  background: #009B7A;
+  background: #B80000;
 }
