@@ -1,0 +1,35 @@
+export default function ChatHeader({ chapter, chapterIndex, totalChapters, onMenuClick }) {
+  return (
+    <div className="chat-header">
+      <div className="header-left">
+        <button className="header-menu" onClick={onMenuClick}>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <line x1="3" y1="6" x2="21" y2="6" />
+            <line x1="3" y1="12" x2="21" y2="12" />
+            <line x1="3" y1="18" x2="21" y2="18" />
+          </svg>
+        </button>
+        <div className="header-avatar">🧭</div>
+        <div className="header-info">
+          <div className="header-name">Navi</div>
+          <div className="header-status">
+            {chapter.emoji} {chapter.title}
+          </div>
+        </div>
+      </div>
+      <div className="header-right">
+        <div className="header-progress">
+          {Array.from({ length: totalChapters }, (_, i) => (
+            <div
+              key={i}
+              className={`progress-dot ${i === chapterIndex ? 'active' : ''} ${i < chapterIndex ? 'done' : ''}`}
+            />
+          ))}
+        </div>
+        <div className="header-chapter-num">
+          {chapterIndex + 1}/{totalChapters}
+        </div>
+      </div>
+    </div>
+  )
+}
