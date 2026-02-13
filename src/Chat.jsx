@@ -29,6 +29,7 @@ export default function Chat({
   const timeoutRef = useRef(null)
   const userDataRef = useRef(userData)
   const lastProcessedRef = useRef(-1)
+  const sectionReadyRef = useRef(true) // Guards against stale flowIndex during section transitions
 
   // Keep userData ref in sync
   useEffect(() => {
@@ -40,6 +41,7 @@ export default function Chat({
     if (timeoutRef.current) clearTimeout(timeoutRef.current)
     processingRef.current = false
     flowRef.current = section.flow
+    sectionReadyRef.current = false // Block stale processing until flowIndex resets to 0
     setDisplayedMessages([])
     setIsTyping(false)
     setCurrentReplies(null)
@@ -116,7 +118,7 @@ export default function Chat({
         const newMsg = { ...msg, text, key: `${section.id}_${index}` }
         setDisplayedMessages(prev => [...prev, newMsg])
 
-        if (msg.score) {
+        if (msg.score && msg.score.value) {
           onScore(msg.score.value, msg.score.points || 1)
         }
 
@@ -152,6 +154,16 @@ export default function Chat({
 
   // Trigger message processing when flowIndex changes
   useEffect(() => {
+    // After a section change, wait for the batched setFlowIndex(0) to take effect
+    // This prevents processing with a stale flowIndex from the previous section
+    if (!sectionReadyRef.current) {
+      if (flowIndex === 0) {
+        sectionReadyRef.current = true
+      } else {
+        return // Skip — stale flowIndex from previous section
+      }
+    }
+
     if (flowIndex >= 0 && !currentReplies && !waitingForInput && flowIndex !== lastProcessedRef.current) {
       lastProcessedRef.current = flowIndex
       processMessage(flowIndex)
@@ -170,7 +182,7 @@ export default function Chat({
     setCurrentReplies(null)
     setInputText('')
 
-    if (reply.score) {
+    if (reply.score && reply.score.value) {
       onScore(reply.score.value, reply.score.points || 1)
     }
 
@@ -244,7 +256,7 @@ export default function Chat({
       setCurrentReplies(null)
       setInputText('')
 
-      if (bestReply.score) {
+      if (bestReply.score && bestReply.score.value) {
         onScore(bestReply.score.value, bestReply.score.points || 1)
       }
       if (bestReply.branch) {

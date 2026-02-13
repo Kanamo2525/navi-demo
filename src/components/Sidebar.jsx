@@ -1,4 +1,4 @@
-export default function Sidebar({ sections, currentSection, completedSections, chosenBranch }) {
+export default function Sidebar({ sections, currentSection, completedSections, chosenBranch, onSectionSelect }) {
   return (
     <div className="sidebar">
       <div className="sidebar-header">
@@ -26,10 +26,13 @@ export default function Sidebar({ sections, currentSection, completedSections, c
           const isActive = i === currentSection
           const isDone = completedSections.includes(i)
           const isLocked = i > 0 && !completedSections.includes(i - 1) && !isActive
+          const isClickable = !isLocked && (isDone || isActive)
           return (
             <div
               key={sec.id}
               className={`sidebar-item ${isActive ? 'active' : ''} ${isDone ? 'done' : ''} ${isLocked ? 'locked' : ''}`}
+              onClick={() => isClickable && onSectionSelect && onSectionSelect(i)}
+              style={{ cursor: isClickable ? 'pointer' : 'default' }}
             >
               <div className="sidebar-item-avatar">
                 <span>{sec.emoji}</span>

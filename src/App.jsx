@@ -90,6 +90,12 @@ export default function App() {
     setUserData(prev => ({ ...prev, chosenBranch: branch }))
   }, [])
 
+  const handleSectionSelect = useCallback((index) => {
+    if (completedSections.includes(index) || index === currentSection) {
+      setCurrentSection(index)
+    }
+  }, [completedSections, currentSection])
+
   if (!started) {
     return <WelcomeScreen onStart={handleStart} />
   }
@@ -101,6 +107,7 @@ export default function App() {
         currentSection={currentSection}
         completedSections={completedSections}
         chosenBranch={chosenBranch}
+        onSectionSelect={handleSectionSelect}
       />
       <Chat
         section={sections[currentSection]}
